@@ -486,6 +486,22 @@ class DataCleaner:
             df.to_parquet(output_path, index=False, compression='snappy')
             logger.info(f"Saved cleaned {name} to {output_path}")
 
+    def _convert_to_serializable(self, obj):
+        """Convert numpy types to Python native types for JSON serialization"""
+        if isinstance(obj, np.integer):
+            return int(obj)
+        elif isinstance(obj, np.floating):
+            return float(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        elif isinstance(obj, dict):
+            return {k: self._convert_to_serializable(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [self._convert_to_serializable(item) for item in obj]
+        else:
+            return obj
+
+    # Update the _generate_cleaning_report method (around line 531):
     def _generate_cleaning_report(self):
         """Generate comprehensive cleaning report"""
         report_path = self.settings.paths.REPORTS_DIR / "cleaning_report.txt"
@@ -521,11 +537,17 @@ class DataCleaner:
 
         logger.info(f"Cleaning report saved to {report_path}")
 
-        # ----- JSON report -----
+        # ----- JSON report (FIXED) -----
         report_path_json = self.settings.paths.REPORTS_DIR / "cleaning_report.json"
-        json_data = {name: asdict(report) for name, report in self.cleaning_reports.items()}
+
+        # Convert all reports to serializable format
+        json_data = {}
+        for name, report in self.cleaning_reports.items():
+            report_dict = asdict(report)
+            # Convert numpy types to Python native types
+            json_data[name] = self._convert_to_serializable(report_dict)
 
         with open(report_path_json, 'w') as f:
-            json.dump(asdict(report), f, indent=4, default=str)
+            json.dump(json_data, f, indent=4, default=str)
 
         logger.info(f"Cleaning JSON report saved to {report_path_json}")
