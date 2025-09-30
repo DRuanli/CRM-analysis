@@ -1,0 +1,28 @@
+2025-09-30 12:09:26 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:09:26 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:09:26 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:09:30 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:09:30 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:09:38 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:09:38 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:09:38 | ERROR    | src.utils.decorators:wrapper:149 | _collect_interactions failed after 3 attempts
+2025-09-30 12:09:38 | ERROR    | src.utils.decorators:wrapper:149 | _collect_transactions failed after 3 attempts
+2025-09-30 12:09:38 | ERROR    | src.utils.decorators:wrapper:118 | Error in collect_all_data: 'DataCollector' object has no attribute '_collect_marketing'
+2025-09-30 12:09:38 | ERROR    | src.utils.decorators:wrapper:68 | collect_all_data failed after 12.42 seconds: 'DataCollector' object has no attribute '_collect_marketing'
+2025-09-30 12:09:38 | ERROR    | src.pipeline.orchestrator:run_pipeline:178 | ✗ Stage data_collection failed: 'DataCollector' object has no attribute '_collect_marketing'
+2025-09-30 12:09:38 | ERROR    | __main__:main:163 |   Error: 'DataCollector' object has no attribute '_collect_marketing'
+2025-09-30 12:09:38 | ERROR    | __main__:main:180 | PIPELINE FAILED - Please check the logs for details

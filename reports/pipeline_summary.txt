@@ -1,0 +1,13 @@
+================================================================================
+PIPELINE EXECUTION SUMMARY
+================================================================================
+
+Start Time: 2025-09-30 12:09:25.695055
+End Time: 2025-09-30 12:09:38.120183
+Total Execution Time: 12.43 seconds
+
+STAGE RESULTS
+----------------------------------------
+data_collection: ✗ FAILED (12.42s)
+  Error: 'DataCollector' object has no attribute '_collect_marketing'
+

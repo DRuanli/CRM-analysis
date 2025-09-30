@@ -1,0 +1,110 @@
+2025-09-30 12:09:25 | INFO     | __main__:main:113 | ================================================================================
+2025-09-30 12:09:25 | INFO     | __main__:main:114 | CRM DATA ANALYSIS PIPELINE - PHASE 1
+2025-09-30 12:09:25 | INFO     | __main__:main:115 | ================================================================================
+2025-09-30 12:09:25 | INFO     | __main__:main:116 | Environment: development
+2025-09-30 12:09:25 | INFO     | __main__:main:117 | Python Version: 3.9.6 (default, Nov 11 2024, 03:15:38) 
+[Clang 16.0.0 (clang-1600.0.26.6)]
+2025-09-30 12:09:25 | INFO     | __main__:main:118 | Project Root: /Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project
+2025-09-30 12:09:25 | INFO     | __main__:main:119 | Start Time: 2025-09-30 12:09:25.694200
+2025-09-30 12:09:25 | INFO     | __main__:main:120 | ================================================================================
+2025-09-30 12:09:25 | INFO     | src.pipeline.orchestrator:__init__:76 | Pipeline Orchestrator initialized
+2025-09-30 12:09:25 | INFO     | src.utils.decorators:wrapper:55 | Starting run_pipeline...
+2025-09-30 12:09:25 | INFO     | src.pipeline.orchestrator:run_pipeline:119 | ================================================================================
+2025-09-30 12:09:25 | INFO     | src.pipeline.orchestrator:run_pipeline:120 | STARTING INDUSTRIAL CRM DATA ANALYSIS PIPELINE - PHASE 1
+2025-09-30 12:09:25 | INFO     | src.pipeline.orchestrator:run_pipeline:121 | ================================================================================
+2025-09-30 12:09:25 | INFO     | src.pipeline.orchestrator:run_pipeline:122 | Start time: 2025-09-30 12:09:25.695055
+2025-09-30 12:09:25 | INFO     | src.pipeline.orchestrator:run_pipeline:123 | Environment: development
+2025-09-30 12:09:25 | INFO     | src.pipeline.orchestrator:run_pipeline:124 | Configuration loaded from: /Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/config
+2025-09-30 12:09:25 | INFO     | src.pipeline.orchestrator:run_pipeline:146 | 
+==================================================
+2025-09-30 12:09:25 | INFO     | src.pipeline.orchestrator:run_pipeline:147 | EXECUTING STAGE: DATA_COLLECTION
+2025-09-30 12:09:25 | INFO     | src.pipeline.orchestrator:run_pipeline:148 | ==================================================
+2025-09-30 12:09:25 | INFO     | src.utils.decorators:wrapper:55 | Starting collect_all_data...
+2025-09-30 12:09:25 | INFO     | src.data.collector:collect_all_data:48 | Collecting data from sources: ['customers', 'transactions', 'interactions', 'marketing']
+2025-09-30 12:09:25 | INFO     | src.data.collector:collect_all_data:49 | Date range: 2023-10-01 to 2025-09-30
+2025-09-30 12:09:25 | INFO     | src.utils.database:redis_client:224 | Connected to Redis cache
+2025-09-30 12:09:25 | WARNING  | src.utils.database:get_cached_dataframe:260 | Failed to retrieve cached DataFrame: Error 61 connecting to localhost:6379. Connection refused.
+2025-09-30 12:09:25 | WARNING  | src.utils.database:get_cached_dataframe:260 | Failed to retrieve cached DataFrame: Error 61 connecting to localhost:6379. Connection refused.
+2025-09-30 12:09:25 | WARNING  | src.utils.database:get_cached_dataframe:260 | Failed to retrieve cached DataFrame: Error 61 connecting to localhost:6379. Connection refused.
+2025-09-30 12:09:25 | WARNING  | src.utils.database:get_cached_dataframe:260 | Failed to retrieve cached DataFrame: Error 61 connecting to localhost:6379. Connection refused.
+2025-09-30 12:09:25 | INFO     | src.utils.database:engine:84 | Created database engine for localhost:5432/crm_analytics
+2025-09-30 12:09:25 | INFO     | src.utils.database:engine:84 | Created database engine for localhost:5432/crm_analytics
+2025-09-30 12:09:25 | INFO     | src.utils.database:engine:84 | Created database engine for localhost:5432/crm_analytics
+2025-09-30 12:09:26 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:09:26 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:09:26 | WARNING  | src.data.collector:_collect_customers:143 | Database collection failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8). Using simulated data.
+2025-09-30 12:09:26 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:09:26 | WARNING  | src.data.collector:_collect_transactions:184 | Database collection failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8). Using simulated data.
+2025-09-30 12:09:26 | WARNING  | src.data.collector:_collect_interactions:220 | Database collection failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8). Using simulated data.
+2025-09-30 12:09:26 | WARNING  | src.utils.decorators:wrapper:153 | _collect_transactions failed (attempt 1/3). Retrying in 4.0 seconds...
+2025-09-30 12:09:26 | WARNING  | src.utils.decorators:wrapper:153 | _collect_interactions failed (attempt 1/3). Retrying in 4.0 seconds...
+2025-09-30 12:09:26 | INFO     | src.data.collector:_simulate_customers:299 | Simulated 50000 customer records
+2025-09-30 12:09:30 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:09:30 | WARNING  | src.data.collector:_collect_interactions:220 | Database collection failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8). Using simulated data.
+2025-09-30 12:09:30 | WARNING  | src.utils.decorators:wrapper:153 | _collect_interactions failed (attempt 2/3). Retrying in 8.0 seconds...
+2025-09-30 12:09:30 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:09:30 | WARNING  | src.data.collector:_collect_transactions:184 | Database collection failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8). Using simulated data.
+2025-09-30 12:09:30 | WARNING  | src.utils.decorators:wrapper:153 | _collect_transactions failed (attempt 2/3). Retrying in 8.0 seconds...
+2025-09-30 12:09:38 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:09:38 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:09:38 | WARNING  | src.data.collector:_collect_interactions:220 | Database collection failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8). Using simulated data.
+2025-09-30 12:09:38 | ERROR    | src.utils.decorators:wrapper:149 | _collect_interactions failed after 3 attempts
+2025-09-30 12:09:38 | WARNING  | src.data.collector:_collect_transactions:184 | Database collection failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8). Using simulated data.
+2025-09-30 12:09:38 | ERROR    | src.utils.decorators:wrapper:149 | _collect_transactions failed after 3 attempts
+2025-09-30 12:09:38 | ERROR    | src.utils.decorators:wrapper:118 | Error in collect_all_data: 'DataCollector' object has no attribute '_collect_marketing'
+2025-09-30 12:09:38 | ERROR    | src.utils.decorators:wrapper:68 | collect_all_data failed after 12.42 seconds: 'DataCollector' object has no attribute '_collect_marketing'
+2025-09-30 12:09:38 | ERROR    | src.pipeline.orchestrator:run_pipeline:178 | ✗ Stage data_collection failed: 'DataCollector' object has no attribute '_collect_marketing'
+2025-09-30 12:09:38 | INFO     | src.pipeline.orchestrator:_generate_pipeline_report:608 | Pipeline report saved to /Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/reports/pipeline_report.json
+2025-09-30 12:09:38 | INFO     | src.utils.database:close_connections:279 | All database connections closed
+2025-09-30 12:09:38 | DEBUG    | src.pipeline.orchestrator:_cleanup:645 | Resources cleaned up
+2025-09-30 12:09:38 | INFO     | src.pipeline.orchestrator:run_pipeline:206 | ================================================================================
+2025-09-30 12:09:38 | INFO     | src.pipeline.orchestrator:run_pipeline:207 | PIPELINE EXECUTION COMPLETED
+2025-09-30 12:09:38 | INFO     | src.pipeline.orchestrator:run_pipeline:208 | ================================================================================
+2025-09-30 12:09:38 | INFO     | src.pipeline.orchestrator:run_pipeline:209 | End time: 2025-09-30 12:09:38.121002
+2025-09-30 12:09:38 | INFO     | src.pipeline.orchestrator:run_pipeline:210 | Total execution time: 12.43 seconds
+2025-09-30 12:09:38 | INFO     | src.pipeline.orchestrator:run_pipeline:216 | Successful stages: 0
+2025-09-30 12:09:38 | INFO     | src.pipeline.orchestrator:run_pipeline:217 | Failed stages: 1
+2025-09-30 12:09:38 | INFO     | src.utils.decorators:wrapper:105 | run_pipeline memory usage: -156.48 MB
+2025-09-30 12:09:38 | SUCCESS  | src.utils.decorators:wrapper:60 | run_pipeline completed in 12.45 seconds
+2025-09-30 12:09:38 | INFO     | src.utils.decorators:wrapper:63 | run_pipeline,12.45
+2025-09-30 12:09:38 | INFO     | __main__:main:147 | 
+================================================================================
+2025-09-30 12:09:38 | INFO     | __main__:main:148 | PIPELINE EXECUTION SUMMARY
+2025-09-30 12:09:38 | INFO     | __main__:main:149 | ================================================================================
+2025-09-30 12:09:38 | INFO     | __main__:main:154 | Total Stages: 1
+2025-09-30 12:09:38 | INFO     | __main__:main:155 | Successful: 0
+2025-09-30 12:09:38 | INFO     | __main__:main:156 | Failed: 1
+2025-09-30 12:09:38 | INFO     | __main__:main:161 | ✗ data_collection: 12.42s
+2025-09-30 12:09:38 | ERROR    | __main__:main:163 |   Error: 'DataCollector' object has no attribute '_collect_marketing'
+2025-09-30 12:09:38 | INFO     | __main__:main:168 | 
+================================================================================
+2025-09-30 12:09:38 | ERROR    | __main__:main:180 | PIPELINE FAILED - Please check the logs for details
+2025-09-30 12:09:38 | INFO     | __main__:main:182 | ================================================================================

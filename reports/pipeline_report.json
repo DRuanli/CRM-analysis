@@ -1,0 +1,16 @@
+{
+  "execution_summary": {
+    "start_time": "2025-09-30 12:09:25.695055",
+    "end_time": "2025-09-30 12:09:38.118059",
+    "total_execution_time": 12.423008,
+    "environment": "development"
+  },
+  "stage_results": {
+    "data_collection": {
+      "success": false,
+      "execution_time": 12.419137,
+      "error": "'DataCollector' object has no attribute '_collect_marketing'",
+      "metadata": {}
+    }
+  }
+}
