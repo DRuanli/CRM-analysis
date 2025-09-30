@@ -290,9 +290,14 @@ class PipelineOrchestrator:
             # Store in cache
             self.data_cache['cleaned_data'] = cleaned_data
 
-            # Get cleaning reports
+            # Convert cleaning reports to dictionaries for JSON serialization
+            from dataclasses import asdict
+            cleaning_reports_dict = {}
+            for name, report in self.cleaner.cleaning_reports.items():
+                cleaning_reports_dict[name] = asdict(report)
+
             metadata = {
-                'cleaning_reports': self.cleaner.cleaning_reports
+                'cleaning_reports': cleaning_reports_dict
             }
 
             execution_time = (datetime.now() - start_time).total_seconds()
@@ -312,6 +317,61 @@ class PipelineOrchestrator:
                 error=str(e),
                 execution_time=(datetime.now() - start_time).total_seconds()
             )
+
+    def get_pipeline_summary(self) -> Dict:
+        """
+        Get a summary of the pipeline execution
+
+        Returns:
+            Dict containing pipeline execution summary
+        """
+        total_time = sum(r.execution_time for r in self.results.values())
+        successful = sum(1 for r in self.results.values() if r.success)
+        failed = len(self.results) - successful
+
+        summary = {
+            'total_stages': len(self.results),
+            'successful_stages': successful,
+            'failed_stages': failed,
+            'total_execution_time': total_time,
+            'stages': {}
+        }
+
+        for stage, result in self.results.items():
+            summary['stages'][stage.value] = {
+                'success': result.success,
+                'execution_time': result.execution_time,
+                'error': result.error
+            }
+
+        return summary
+
+    def export_results(self):
+        """Export all pipeline results to files"""
+        export_dir = self.settings.paths.REPORTS_DIR / 'exports'
+        export_dir.mkdir(exist_ok=True)
+
+        # Export each result
+        for stage, result in self.results.items():
+            if result.data is not None and isinstance(result.data, pd.DataFrame):
+                filepath = export_dir / f"{stage.value}_data.parquet"
+                result.data.to_parquet(filepath)
+                logger.info(f"Exported {stage.value} data to {filepath}")
+
+    def _cleanup(self):
+        """Clean up resources"""
+        try:
+            # Close database connections
+            if hasattr(self, 'db_manager'):
+                self.db_manager.close_connections()
+
+            # Clear large objects from memory
+            if self.settings.env == 'production':
+                self.data_cache.clear()
+
+            logger.debug("Resources cleaned up")
+        except Exception as e:
+            logger.warning(f"Error during cleanup: {str(e)}")
 
     def _run_data_validation(self, **kwargs) -> PipelineResult:
         """Run data validation stage"""

@@ -85,11 +85,13 @@ class DataValidator:
 
         # Check if DataFrame is empty
         if len(df) == 0:
+            # Empty marketing data is acceptable (warning), but other datasets should have data (error)
+            severity = 'warning' if 'marketing' in dataset_name.lower() else 'error'
             self.validation_results.append(ValidationCheck(
                 check_name="empty_dataframe",
                 passed=False,
                 message=f"DataFrame {dataset_name} is empty",
-                severity='error'
+                severity=severity
             ))
         else:
             self.validation_results.append(ValidationCheck(
@@ -216,8 +218,20 @@ class DataValidator:
                 severity='info'
             ))
 
-        # Check for duplicate IDs
-        id_columns = [col for col in df.columns if 'customer_id' in col.lower() or col.lower().endswith('_id')]
+        # Check for duplicate IDs (only for actual ID columns, not foreign keys)
+        # Look for columns that are likely to be unique identifiers
+        id_columns = []
+        for col in df.columns:
+            # Only check columns that end with _id and are likely to be unique
+            # Skip customer_id in transactions/interactions as it's a foreign key
+            if col.lower().endswith('_id'):
+                # Check if it's likely a unique ID (not a foreign key)
+                if col in ['transaction_id', 'interaction_id', 'campaign_id', 'order_id', 'product_id']:
+                    id_columns.append(col)
+                elif col == 'customer_id' and 'transaction_id' not in df.columns and 'interaction_id' not in df.columns:
+                    # Only check customer_id if it's in the main customers table
+                    id_columns.append(col)
+
         for col in id_columns:
             if col in df.columns:
                 duplicates = df[col].duplicated().sum()
