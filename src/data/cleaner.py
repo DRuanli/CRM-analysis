@@ -10,6 +10,9 @@ warnings.filterwarnings('ignore')
 from config.settings import get_settings
 from src.utils.decorators import timer, memory_monitor
 
+from dataclasses import asdict
+import json
+
 @dataclass
 class CleaningReport:
     """Data cleaning report"""
@@ -465,7 +468,7 @@ class DataCleaner:
         lower_bound = Q1 - factor * IQR
         upper_bound = Q3 + factor * IQR
 
-        outliers = (df[column] < lower_bound | df[column] > upper_bound)
+        outliers = (df[column] < lower_bound) | (df[column] > upper_bound)
         outlier_count = outliers.sum()
 
         if outlier_count > 0:
@@ -517,3 +520,12 @@ class DataCleaner:
                 f.write("\n")
 
         logger.info(f"Cleaning report saved to {report_path}")
+
+        # ----- JSON report -----
+        report_path_json = self.settings.paths.REPORTS_DIR / "cleaning_report.json"
+        json_data = {name: asdict(report) for name, report in self.cleaning_reports.items()}
+
+        with open(report_path_json, 'w') as f:
+            json.dump(asdict(report), f, indent=4, default=str)
+
+        logger.info(f"Cleaning JSON report saved to {report_path_json}")

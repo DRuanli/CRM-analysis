@@ -26,3 +26,414 @@
 2025-09-30 12:09:38 | ERROR    | src.pipeline.orchestrator:run_pipeline:178 | ✗ Stage data_collection failed: 'DataCollector' object has no attribute '_collect_marketing'
 2025-09-30 12:09:38 | ERROR    | __main__:main:163 |   Error: 'DataCollector' object has no attribute '_collect_marketing'
 2025-09-30 12:09:38 | ERROR    | __main__:main:180 | PIPELINE FAILED - Please check the logs for details
+2025-09-30 12:13:48 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:13:48 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:13:48 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:13:52 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:13:52 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:14:00 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:14:00 | ERROR    | src.utils.decorators:wrapper:149 | _collect_interactions failed after 3 attempts
+2025-09-30 12:14:00 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "data_analyst" does not exist
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-30 12:14:00 | ERROR    | src.utils.decorators:wrapper:149 | _collect_transactions failed after 3 attempts
+2025-09-30 12:14:00 | ERROR    | src.utils.decorators:wrapper:118 | Error in collect_all_data: 'DataCollector' object has no attribute '_collect_marketing'
+2025-09-30 12:14:00 | ERROR    | src.utils.decorators:wrapper:68 | collect_all_data failed after 12.43 seconds: 'DataCollector' object has no attribute '_collect_marketing'
+2025-09-30 12:14:00 | ERROR    | src.pipeline.orchestrator:run_pipeline:178 | ✗ Stage data_collection failed: 'DataCollector' object has no attribute '_collect_marketing'
+2025-09-30 12:14:00 | ERROR    | __main__:main:163 |   Error: 'DataCollector' object has no attribute '_collect_marketing'
+2025-09-30 12:14:00 | ERROR    | __main__:main:180 | PIPELINE FAILED - Please check the logs for details
+2025-09-30 12:21:46 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.errors.UndefinedTable) relation "customer_interactions" does not exist
+LINE 18:         FROM customer_interactions
+                      ^
+
+[SQL: 
+        SELECT 
+            interaction_id,
+            customer_id,
+            interaction_date,
+            interaction_type,
+            interaction_subtype,
+            channel,
+            agent_id,
+            duration_seconds,
+            wait_time_seconds,
+            resolution_status,
+            satisfaction_score,
+            nps_score,
+            sentiment_score,
+            ticket_id,
+            tags
+        FROM customer_interactions
+        WHERE interaction_date BETWEEN %(start_date)s AND %(end_date)s
+        ]
+[parameters: {'start_date': datetime.datetime(2023, 10, 1, 12, 21, 46, 537658), 'end_date': datetime.datetime(2025, 9, 30, 12, 21, 46, 537658)}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-09-30 12:21:46 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.errors.UndefinedTable) relation "transactions" does not exist
+LINE 21:         FROM transactions t
+                      ^
+
+[SQL: 
+        SELECT 
+            t.transaction_id,
+            t.customer_id,
+            t.transaction_date,
+            t.product_id,
+            p.product_name,
+            p.product_category,
+            p.product_subcategory,
+            t.quantity,
+            t.unit_price,
+            t.total_amount,
+            t.discount_amount,
+            t.tax_amount,
+            t.payment_method,
+            t.payment_status,
+            t.transaction_status,
+            t.channel,
+            t.device_type,
+            t.session_id
+        FROM transactions t
+        LEFT JOIN products p ON t.product_id = p.product_id
+        WHERE t.transaction_date BETWEEN %(start_date)s AND %(end_date)s
+            AND t.transaction_status = 'completed'
+        ]
+[parameters: {'start_date': datetime.datetime(2023, 10, 1, 12, 21, 46, 537658), 'end_date': datetime.datetime(2025, 9, 30, 12, 21, 46, 537658)}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-09-30 12:21:46 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.errors.UndefinedTable) relation "customers" does not exist
+LINE 25:         FROM customers
+                      ^
+
+[SQL: 
+        SELECT 
+            customer_id,
+            registration_date,
+            date_of_birth,
+            age,
+            gender,
+            country,
+            state,
+            city,
+            postal_code,
+            acquisition_channel,
+            acquisition_campaign,
+            customer_segment,
+            customer_tier,
+            lifetime_value,
+            preferred_contact_method,
+            email_verified,
+            phone_verified,
+            account_status,
+            churn_date,
+            churned,
+            created_at,
+            updated_at
+        FROM customers
+        WHERE registration_date BETWEEN %(start_date)s AND %(end_date)s
+            AND account_status NOT IN ('test', 'deleted')
+        ]
+[parameters: {'start_date': datetime.datetime(2023, 10, 1, 12, 21, 46, 537658), 'end_date': datetime.datetime(2025, 9, 30, 12, 21, 46, 537658)}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-09-30 12:21:46 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.errors.UndefinedTable) relation "marketing_campaigns" does not exist
+LINE 18:         FROM marketing_campaigns mc
+                      ^
+
+[SQL: 
+        SELECT 
+            mc.campaign_id,
+            mc.customer_id,
+            mc.campaign_date,
+            mc.campaign_type,
+            mc.campaign_name,
+            mc.campaign_category,
+            mc.channel,
+            mc.sent,
+            mc.opened,
+            mc.clicked,
+            mc.converted,
+            mc.unsubscribed,
+            mc.bounced,
+            mc.cost,
+            mc.revenue_attributed
+        FROM marketing_campaigns mc
+        WHERE mc.campaign_date BETWEEN %(start_date)s AND %(end_date)s
+            AND mc.sent = true
+        ]
+[parameters: {'start_date': datetime.datetime(2023, 10, 1, 12, 21, 46, 537658), 'end_date': datetime.datetime(2025, 9, 30, 12, 21, 46, 537658)}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-09-30 12:21:50 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.errors.UndefinedTable) relation "transactions" does not exist
+LINE 21:         FROM transactions t
+                      ^
+
+[SQL: 
+        SELECT 
+            t.transaction_id,
+            t.customer_id,
+            t.transaction_date,
+            t.product_id,
+            p.product_name,
+            p.product_category,
+            p.product_subcategory,
+            t.quantity,
+            t.unit_price,
+            t.total_amount,
+            t.discount_amount,
+            t.tax_amount,
+            t.payment_method,
+            t.payment_status,
+            t.transaction_status,
+            t.channel,
+            t.device_type,
+            t.session_id
+        FROM transactions t
+        LEFT JOIN products p ON t.product_id = p.product_id
+        WHERE t.transaction_date BETWEEN %(start_date)s AND %(end_date)s
+            AND t.transaction_status = 'completed'
+        ]
+[parameters: {'start_date': datetime.datetime(2023, 10, 1, 12, 21, 46, 537658), 'end_date': datetime.datetime(2025, 9, 30, 12, 21, 46, 537658)}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-09-30 12:21:50 | ERROR    | src.utils.database:execute_query:137 | Query execution failed: (psycopg2.errors.UndefinedTable) relation "customer_interactions" does not exist
+LINE 18:         FROM customer_interactions
+                      ^
+
+[SQL: 
+        SELECT 
+            interaction_id,
+            customer_id,
+            interaction_date,
+            interaction_type,
+            interaction_subtype,
+            channel,
+            agent_id,
+            duration_seconds,
+            wait_time_seconds,
+            resolution_status,
+            satisfaction_score,
+            nps_score,
+            sentiment_score,
+            ticket_id,
+            tags
+        FROM customer_interactions
+        WHERE interaction_date BETWEEN %(start_date)s AND %(end_date)s
+        ]
+[parameters: {'start_date': datetime.datetime(2023, 10, 1, 12, 21, 46, 537658), 'end_date': datetime.datetime(2025, 9, 30, 12, 21, 46, 537658)}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-09-30 12:23:44 | ERROR    | src.utils.decorators:wrapper:118 | Error in clean_all_data: Cannot perform 'ror_' with a dtyped [float64] array and scalar of type [bool]
+2025-09-30 12:23:44 | ERROR    | src.utils.decorators:wrapper:68 | clean_all_data failed after 0.05 seconds: Cannot perform 'ror_' with a dtyped [float64] array and scalar of type [bool]
+2025-09-30 12:23:44 | ERROR    | src.pipeline.orchestrator:run_pipeline:178 | ✗ Stage data_cleaning failed: Cannot perform 'ror_' with a dtyped [float64] array and scalar of type [bool]
+2025-09-30 12:23:44 | ERROR    | __main__:main:163 |   Error: Cannot perform 'ror_' with a dtyped [float64] array and scalar of type [bool]
+2025-09-30 12:23:44 | ERROR    | __main__:main:180 | PIPELINE FAILED - Please check the logs for details
+2025-09-30 12:26:59 | ERROR    | src.data.validator:validate_data:72 | ❌ duplicate_ids_customer_id: Found 695,654 duplicate values in ID column 'customer_id'
+2025-09-30 12:27:00 | ERROR    | src.data.validator:validate_data:72 | ❌ duplicate_ids_customer_id: Found 204,923 duplicate values in ID column 'customer_id'
+2025-09-30 12:27:00 | ERROR    | src.data.validator:validate_data:72 | ❌ empty_dataframe: DataFrame dataset is empty
+2025-09-30 12:27:00 | ERROR    | src.pipeline.orchestrator:run_pipeline:178 | ✗ Stage data_validation failed: None
+2025-09-30 12:27:00 | ERROR    | src.utils.decorators:wrapper:118 | Error in run_pipeline: Object of type CleaningReport is not JSON serializable
+2025-09-30 12:27:00 | ERROR    | src.utils.decorators:wrapper:68 | run_pipeline failed after 24.41 seconds: Object of type CleaningReport is not JSON serializable
+2025-09-30 12:27:00 | ERROR    | __main__:main:187 | Pipeline execution failed: Object of type CleaningReport is not JSON serializable
+2025-09-30 12:27:00 | ERROR    | __main__:main:188 | Object of type CleaningReport is not JSON serializable
+Traceback (most recent call last):
+
+  File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/scripts/run_pipeline.py", line 193, in <module>
+    main()
+    └ <function main at 0x14b1f9ee0>
+
+> File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/scripts/run_pipeline.py", line 140, in main
+    results = orchestrator.run_pipeline(
+              │            └ <function PipelineOrchestrator.run_pipeline at 0x14b1e5dc0>
+              └ <src.pipeline.orchestrator.PipelineOrchestrator object at 0x14b1fdfd0>
+
+  File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/src/utils/decorators.py", line 58, in wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {'stages': None, 'resume_from': None, 'use_cache': True, 'continue_on_error': False, 'generate_plots': True, 'deep_clean': Tr...
+             │     └ (<src.pipeline.orchestrator.PipelineOrchestrator object at 0x14b1fdfd0>,)
+             └ <function PipelineOrchestrator.run_pipeline at 0x14b1e5d30>
+
+  File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/src/utils/decorators.py", line 99, in wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {'stages': None, 'resume_from': None, 'use_cache': True, 'continue_on_error': False, 'generate_plots': True, 'deep_clean': Tr...
+             │     └ (<src.pipeline.orchestrator.PipelineOrchestrator object at 0x14b1fdfd0>,)
+             └ <function PipelineOrchestrator.run_pipeline at 0x14b1e5b80>
+
+  File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/src/pipeline/orchestrator.py", line 198, in run_pipeline
+    self._generate_pipeline_report()
+    │    └ <function PipelineOrchestrator._generate_pipeline_report at 0x14b1ea310>
+    └ <src.pipeline.orchestrator.PipelineOrchestrator object at 0x14b1fdfd0>
+
+  File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/src/pipeline/orchestrator.py", line 630, in _generate_pipeline_report
+    f.write(f"  Metadata: {json.dumps(result.metadata, indent=4)}\n")
+    │ └ <method 'write' of '_io.TextIOWrapper' objects>
+    └ <_io.TextIOWrapper name='/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/reports/pipelin...
+
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/__init__.py", line 234, in dumps
+    return cls(
+           └ <class 'json.encoder.JSONEncoder'>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+                  └ <generator object _make_iterencode.<locals>._iterencode at 0x16aec7f90>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+               │                │  └ 0
+               │                └ {'cleaning_reports': {'customers': CleaningReport(total_records_before=50000, total_records_after=50000, duplicates_removed=0...
+               └ <function _make_iterencode.<locals>._iterencode_dict at 0x16c0f0790>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+               └ <generator object _make_iterencode.<locals>._iterencode_dict at 0x314235040>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+               └ <generator object _make_iterencode.<locals>._iterencode at 0x314235120>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+        │        └ CleaningReport(total_records_before=50000, total_records_after=50000, duplicates_removed=0, missing_values_handled={}, outlie...
+        └ <bound method JSONEncoder.default of <json.encoder.JSONEncoder object at 0x313df6340>>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+
+TypeError: Object of type CleaningReport is not JSON serializable
+2025-09-30 12:31:54 | ERROR    | src.utils.decorators:wrapper:118 | Error in clean_all_data: Object of type int64 is not JSON serializable
+2025-09-30 12:31:54 | ERROR    | src.utils.decorators:wrapper:68 | clean_all_data failed after 2.68 seconds: Object of type int64 is not JSON serializable
+2025-09-30 12:31:54 | ERROR    | src.pipeline.orchestrator:run_pipeline:178 | ✗ Stage data_cleaning failed: Object of type int64 is not JSON serializable
+2025-09-30 12:31:54 | ERROR    | __main__:main:163 |   Error: Object of type int64 is not JSON serializable
+2025-09-30 12:31:54 | ERROR    | __main__:main:180 | PIPELINE FAILED - Please check the logs for details
+2025-09-30 12:33:12 | ERROR    | src.data.validator:validate_data:72 | ❌ duplicate_ids_customer_id: Found 695,654 duplicate values in ID column 'customer_id'
+2025-09-30 12:33:13 | ERROR    | src.data.validator:validate_data:72 | ❌ duplicate_ids_customer_id: Found 204,923 duplicate values in ID column 'customer_id'
+2025-09-30 12:33:13 | ERROR    | src.data.validator:validate_data:72 | ❌ empty_dataframe: DataFrame dataset is empty
+2025-09-30 12:33:13 | ERROR    | src.pipeline.orchestrator:run_pipeline:178 | ✗ Stage data_validation failed: None
+2025-09-30 12:33:13 | ERROR    | src.utils.decorators:wrapper:118 | Error in run_pipeline: Object of type CleaningReport is not JSON serializable
+2025-09-30 12:33:13 | ERROR    | src.utils.decorators:wrapper:68 | run_pipeline failed after 20.22 seconds: Object of type CleaningReport is not JSON serializable
+2025-09-30 12:33:13 | ERROR    | __main__:main:187 | Pipeline execution failed: Object of type CleaningReport is not JSON serializable
+2025-09-30 12:33:13 | ERROR    | __main__:main:188 | Object of type CleaningReport is not JSON serializable
+Traceback (most recent call last):
+
+  File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/scripts/run_pipeline.py", line 193, in <module>
+    main()
+    └ <function main at 0x163e79ee0>
+
+> File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/scripts/run_pipeline.py", line 140, in main
+    results = orchestrator.run_pipeline(
+              │            └ <function PipelineOrchestrator.run_pipeline at 0x163e65dc0>
+              └ <src.pipeline.orchestrator.PipelineOrchestrator object at 0x163e7ceb0>
+
+  File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/src/utils/decorators.py", line 58, in wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {'stages': None, 'resume_from': None, 'use_cache': True, 'continue_on_error': False, 'generate_plots': True, 'deep_clean': Tr...
+             │     └ (<src.pipeline.orchestrator.PipelineOrchestrator object at 0x163e7ceb0>,)
+             └ <function PipelineOrchestrator.run_pipeline at 0x163e65d30>
+
+  File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/src/utils/decorators.py", line 99, in wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {'stages': None, 'resume_from': None, 'use_cache': True, 'continue_on_error': False, 'generate_plots': True, 'deep_clean': Tr...
+             │     └ (<src.pipeline.orchestrator.PipelineOrchestrator object at 0x163e7ceb0>,)
+             └ <function PipelineOrchestrator.run_pipeline at 0x163e65b80>
+
+  File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/src/pipeline/orchestrator.py", line 198, in run_pipeline
+    self._generate_pipeline_report()
+    │    └ <function PipelineOrchestrator._generate_pipeline_report at 0x163e69310>
+    └ <src.pipeline.orchestrator.PipelineOrchestrator object at 0x163e7ceb0>
+
+  File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/src/pipeline/orchestrator.py", line 630, in _generate_pipeline_report
+    f.write(f"  Metadata: {json.dumps(result.metadata, indent=4)}\n")
+    │ └ <method 'write' of '_io.TextIOWrapper' objects>
+    └ <_io.TextIOWrapper name='/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/reports/pipelin...
+
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/__init__.py", line 234, in dumps
+    return cls(
+           └ <class 'json.encoder.JSONEncoder'>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+                  └ <generator object _make_iterencode.<locals>._iterencode at 0x30aff8d60>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+               │                │  └ 0
+               │                └ {'cleaning_reports': {'customers': CleaningReport(total_records_before=50000, total_records_after=50000, duplicates_removed=0...
+               └ <function _make_iterencode.<locals>._iterencode_dict at 0x30d08f790>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+               └ <generator object _make_iterencode.<locals>._iterencode_dict at 0x30aff8f20>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+               └ <generator object _make_iterencode.<locals>._iterencode at 0x30aff8f90>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+        │        └ CleaningReport(total_records_before=50000, total_records_after=50000, duplicates_removed=0, missing_values_handled={}, outlie...
+        └ <bound method JSONEncoder.default of <json.encoder.JSONEncoder object at 0x33aeea370>>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+
+TypeError: Object of type CleaningReport is not JSON serializable
+2025-09-30 12:34:27 | ERROR    | src.data.validator:validate_data:72 | ❌ duplicate_ids_customer_id: Found 695,654 duplicate values in ID column 'customer_id'
+2025-09-30 12:34:29 | ERROR    | src.data.validator:validate_data:72 | ❌ duplicate_ids_customer_id: Found 204,923 duplicate values in ID column 'customer_id'
+2025-09-30 12:34:29 | ERROR    | src.data.validator:validate_data:72 | ❌ empty_dataframe: DataFrame dataset is empty
+2025-09-30 12:34:29 | ERROR    | src.pipeline.orchestrator:run_pipeline:178 | ✗ Stage data_validation failed: None
+2025-09-30 12:34:29 | ERROR    | src.utils.decorators:wrapper:118 | Error in run_pipeline: Object of type CleaningReport is not JSON serializable
+2025-09-30 12:34:29 | ERROR    | src.utils.decorators:wrapper:68 | run_pipeline failed after 24.16 seconds: Object of type CleaningReport is not JSON serializable
+2025-09-30 12:34:29 | ERROR    | __main__:main:187 | Pipeline execution failed: Object of type CleaningReport is not JSON serializable
+2025-09-30 12:34:29 | ERROR    | __main__:main:188 | Object of type CleaningReport is not JSON serializable
+Traceback (most recent call last):
+
+  File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/scripts/run_pipeline.py", line 193, in <module>
+    main()
+    └ <function main at 0x162977ee0>
+
+> File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/scripts/run_pipeline.py", line 140, in main
+    results = orchestrator.run_pipeline(
+              │            └ <function PipelineOrchestrator.run_pipeline at 0x162964dc0>
+              └ <src.pipeline.orchestrator.PipelineOrchestrator object at 0x16297dfd0>
+
+  File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/src/utils/decorators.py", line 58, in wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {'stages': None, 'resume_from': None, 'use_cache': True, 'continue_on_error': False, 'generate_plots': True, 'deep_clean': Tr...
+             │     └ (<src.pipeline.orchestrator.PipelineOrchestrator object at 0x16297dfd0>,)
+             └ <function PipelineOrchestrator.run_pipeline at 0x162964d30>
+
+  File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/src/utils/decorators.py", line 99, in wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {'stages': None, 'resume_from': None, 'use_cache': True, 'continue_on_error': False, 'generate_plots': True, 'deep_clean': Tr...
+             │     └ (<src.pipeline.orchestrator.PipelineOrchestrator object at 0x16297dfd0>,)
+             └ <function PipelineOrchestrator.run_pipeline at 0x162964b80>
+
+  File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/src/pipeline/orchestrator.py", line 198, in run_pipeline
+    self._generate_pipeline_report()
+    │    └ <function PipelineOrchestrator._generate_pipeline_report at 0x16296a310>
+    └ <src.pipeline.orchestrator.PipelineOrchestrator object at 0x16297dfd0>
+
+  File "/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/src/pipeline/orchestrator.py", line 630, in _generate_pipeline_report
+    f.write(f"  Metadata: {json.dumps(result.metadata, indent=4)}\n")
+    │ └ <method 'write' of '_io.TextIOWrapper' objects>
+    └ <_io.TextIOWrapper name='/Users/lenguyen/Documents/research-projects/01-data-science/001-CRM-analysis-project/reports/pipelin...
+
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/__init__.py", line 234, in dumps
+    return cls(
+           └ <class 'json.encoder.JSONEncoder'>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+                  └ <generator object _make_iterencode.<locals>._iterencode at 0x333c5add0>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+               │                │  └ 0
+               │                └ {'cleaning_reports': {'customers': CleaningReport(total_records_before=50000, total_records_after=50000, duplicates_removed=0...
+               └ <function _make_iterencode.<locals>._iterencode_dict at 0x334ab1790>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+               └ <generator object _make_iterencode.<locals>._iterencode_dict at 0x333c5ac80>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+               └ <generator object _make_iterencode.<locals>._iterencode at 0x333c5ae40>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+        │        └ CleaningReport(total_records_before=50000, total_records_after=50000, duplicates_removed=0, missing_values_handled={}, outlie...
+        └ <bound method JSONEncoder.default of <json.encoder.JSONEncoder object at 0x33a7bd340>>
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+
+TypeError: Object of type CleaningReport is not JSON serializable

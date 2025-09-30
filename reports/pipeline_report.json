@@ -1,16 +1,61 @@
 {
   "execution_summary": {
-    "start_time": "2025-09-30 12:09:25.695055",
-    "end_time": "2025-09-30 12:09:38.118059",
-    "total_execution_time": 12.423008,
+    "start_time": "2025-09-30 12:34:05.030616",
+    "end_time": "2025-09-30 12:34:29.188038",
+    "total_execution_time": 24.157424,
     "environment": "development"
   },
   "stage_results": {
     "data_collection": {
+      "success": true,
+      "execution_time": 9.186991,
+      "error": null,
+      "metadata": {
+        "total_datasets": 4,
+        "datasets": {
+          "customers": {
+            "records": 50000,
+            "columns": 12,
+            "memory_mb": 26.08677101135254
+          },
+          "transactions": {
+            "records": 745616,
+            "columns": 9,
+            "memory_mb": 364.3169012069702
+          },
+          "interactions": {
+            "records": 254885,
+            "columns": 8,
+            "memory_mb": 108.14297294616699
+          },
+          "marketing": {
+            "records": 0,
+            "columns": 0,
+            "memory_mb": 0.0
+          }
+        }
+      }
+    },
+    "data_cleaning": {
+      "success": true,
+      "execution_time": 2.995611,
+      "error": null,
+      "metadata": {
+        "cleaning_reports": {
+          "customers": "CleaningReport(total_records_before=50000, total_records_after=50000, duplicates_removed=0, missing_values_handled={}, outliers_handled={'age': 326}, data_types_fixed=[\"customer_id--><class 'str'>\", \"age--><class 'float'>\", 'registration_date-->datetime64[ns]', \"churned--><class 'int'>\"], validation_errors=[], cleaning_time=0)",
+          "transactions": "CleaningReport(total_records_before=745616, total_records_after=745616, duplicates_removed=0, missing_values_handled={}, outliers_handled={'total_amount': 33848}, data_types_fixed=[\"customer_id--><class 'str'>\", \"transaction_id--><class 'str'>\", \"total_amount--><class 'float'>\", \"discount_amount--><class 'float'>\", 'transaction_date-->datetime64[ns]'], validation_errors=[], cleaning_time=0)",
+          "interactions": "CleaningReport(total_records_before=254885, total_records_after=254885, duplicates_removed=0, missing_values_handled={}, outliers_handled={}, data_types_fixed=[\"customer_id--><class 'str'>\", \"interaction_id--><class 'str'>\", \"duration_seconds--><class 'float'>\", \"satisfaction_score--><class 'float'>\", 'interaction_date-->datetime64[ns]'], validation_errors=[], cleaning_time=0)",
+          "marketing": "CleaningReport(total_records_before=0, total_records_after=0, duplicates_removed=0, missing_values_handled={}, outliers_handled={}, data_types_fixed=[], validation_errors=[], cleaning_time=0)"
+        }
+      }
+    },
+    "data_validation": {
       "success": false,
-      "execution_time": 12.419137,
-      "error": "'DataCollector' object has no attribute '_collect_marketing'",
-      "metadata": {}
+      "execution_time": 5.583997,
+      "error": null,
+      "metadata": {
+        "all_datasets_valid": false
+      }
     }
   }
 }

@@ -220,6 +220,43 @@ class DataCollector:
             logger.warning(f"Database collection failed: {str(e)}. Using simulated data.")
             return self._simulate_interactions(date_range)
 
+    @retry(max_attempts=3, delay=2.0)
+    def _collect_marketing(self, date_range: tuple) -> pd.DataFrame:
+        """Collect marketing campaign data"""
+        query = """
+        SELECT 
+            mc.campaign_id,
+            mc.customer_id,
+            mc.campaign_date,
+            mc.campaign_type,
+            mc.campaign_name,
+            mc.campaign_category,
+            mc.channel,
+            mc.sent,
+            mc.opened,
+            mc.clicked,
+            mc.converted,
+            mc.unsubscribed,
+            mc.bounced,
+            mc.cost,
+            mc.revenue_attributed
+        FROM marketing_campaigns mc
+        WHERE mc.campaign_date BETWEEN :start_date AND :end_date
+            AND mc.sent = true
+        """
+
+        params = {
+            'start_date': date_range[0],
+            'end_date': date_range[1]
+        }
+
+        try:
+            df = self.db.execute_query(query, params)
+            return self._validate_marketing(df)
+        except Exception as e:
+            logger.warning(f"Database collection failed: {str(e)}. Using simulated data.")
+            return self._simulate_marketing_data(date_range)
+
     def _simulate_customers(self, n_customers: int, date_range: tuple) -> pd.DataFrame:
         """Simulate realistic customer data for testing"""
         np.random.seed(self.settings.data.random_state)

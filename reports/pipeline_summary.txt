@@ -2,12 +2,36 @@
 PIPELINE EXECUTION SUMMARY
 ================================================================================
 
-Start Time: 2025-09-30 12:09:25.695055
-End Time: 2025-09-30 12:09:38.120183
-Total Execution Time: 12.43 seconds
+Start Time: 2025-09-30 12:34:05.030616
+End Time: 2025-09-30 12:34:29.189582
+Total Execution Time: 24.16 seconds
 
 STAGE RESULTS
 ----------------------------------------
-data_collection: ✗ FAILED (12.42s)
-  Error: 'DataCollector' object has no attribute '_collect_marketing'
-
+data_collection: ✓ SUCCESS (9.19s)
+  Metadata: {
+    "total_datasets": 4,
+    "datasets": {
+        "customers": {
+            "records": 50000,
+            "columns": 12,
+            "memory_mb": 26.08677101135254
+        },
+        "transactions": {
+            "records": 745616,
+            "columns": 9,
+            "memory_mb": 364.3169012069702
+        },
+        "interactions": {
+            "records": 254885,
+            "columns": 8,
+            "memory_mb": 108.14297294616699
+        },
+        "marketing": {
+            "records": 0,
+            "columns": 0,
+            "memory_mb": 0.0
+        }
+    }
+}
+data_cleaning: ✓ SUCCESS (3.00s)
